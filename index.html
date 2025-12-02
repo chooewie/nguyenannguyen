@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>ME LOVE YOU BRO</title>
+<style>
+    body {
+        background: #ffe6f2;
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        overflow: hidden;
+    }
+    h1 {
+        margin-top: 80px;
+        font-size: 40px;
+        color: #ff4d88;
+        animation: fadeIn 2s ease-in-out;
+    }
+    #question {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+    button {
+        padding: 15px 25px;
+        font-size: 20px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.2s;
+    }
+    #yesBtn {
+        background: #ff66a3;
+        color: white;
+    }
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
+    #noBtn {
+        background: #cccccc;
+    }
+
+    /* Hiệu ứng trái tim */
+    .heart {
+        position: fixed;
+        color: #ff4d88;
+        font-size: 20px;
+        animation: floatUp 3s linear forwards;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-200px); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- NHẠC NỀN -->
+<audio id="bgm" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<h1>💖</h1>
+<p id="question"> HEY DO YOU LOVE ME??</p>
+
+<button id="yesBtn">YES BABU</button>
+<button id="noBtn">EW YOU FREAK!!!</button>
+
+<script>
+    // Nút "Không" chạy trốn
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 200);
+        const y = Math.random() * (window.innerHeight - 200);
+        noBtn.style.position = "absolute";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    // Khi bấm "Có"
+    document.getElementById("yesBtn").onclick = function () {
+        // Phát nhạc
+        const bgm = document.getElementById("bgm");
+        bgm.play();
+
+        // Hiển thị màn hình mới
+        document.body.innerHTML = `
+            <h1>YASSS I LOVE YOU NIG 💗</h1>
+            <p style='font-size:22px;'>I KNOW YOU LOVE ME  :3</p>
+        `;
+        setInterval(createHeart, 200);
+    };
+
+    // Tạo trái tim bay
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+    }
+</script>
+
+</body>
+</html>
